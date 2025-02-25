@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Memories</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+        
+        /* Interactive elements */
+        .memory-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .memory-card::before {
+            content: "\f030";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .memory-card:hover::before {
+            opacity: 1;
+        }
+        
+        .video-card img {
+            filter: brightness(0.8);
+        }
+        
+        .video-card::before {
+            content: "\f04b";
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">Back to Home</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <header class="place-header">
+            <h1>Chennai</h1>
+            <p>The city of warmth and endless stories</p>
+        </header>
+
+        <section class="memories-grid">
+            <article class="memory-card">
+                <img src="../images/ch1.jpg" alt="Chennai Sunset" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Sunset Reflections</h3>
+                    <p class="memory-date">2024</p>
+                    <p class="memory-description">Chennai sunset gives me more lessons...</p>
+                </div>
+            </article>
+
+            <article class="memory-card video-card">
+                <img src="../images/ch1.jpg" alt="Morning Train Travel" onclick="openVideo('../images/ch2.mp4')">
+                <div class="memory-content">
+                    <h3>Morning Train Journey</h3>
+                    <p class="memory-date">2024</p>
+                    <p class="memory-description">Morning train travel that made me go silent thinking of those people I saw and their life in this city...</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        // Simple lightbox function
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening lightbox with image:', src);
+        }
+        
+        // Video lightbox function
+        function openVideo(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<video controls autoplay style="max-width: 90%; max-height: 90vh;"><source src="' + src + '" type="video/mp4"></video>';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening video:', src);
+        }
+        
+        // Close lightbox when clicking on it
+        document.getElementById('page-lightbox').onclick = function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                
+                // Stop video if playing
+                var video = this.querySelector('video');
+                if (video) video.pause();
+            }
+        };
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var lightbox = document.getElementById('page-lightbox');
+                lightbox.style.display = 'none';
+                
+                // Stop video if playing
+                var video = lightbox.querySelector('video');
+                if (video) video.pause();
+            }
+        });
+    </script>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 

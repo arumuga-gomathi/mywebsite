@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Memory Collection</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Index page specific background */
+        body {
+            background: linear-gradient(180deg,
+                rgba(44, 62, 80, 0.15) 0%,
+                rgba(231, 76, 60, 0.5) 40%,
+                rgba(230, 126, 34, 0.5) 100%
+            ), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="white" /></svg>');
+            backdrop-filter: blur(150px);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Reduce spacing between sections */
+        .content-section {
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            padding: 1rem 0;
+            background: linear-gradient(180deg,
+                rgba(236, 240, 241, 0.6) 0%,    /* Light grayish blue */
+                rgba(189, 195, 199, 0.6) 50%,   /* Soft gray */
+                rgba(149, 165, 166, 0.6) 100%   /* Muted blue-gray */
+            );
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+        
+        /* Ensure consistent spacing */
+        section {
+            margin: 0;
+            padding: 1rem 0;
+        }
+
+        .thought-preview-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            margin: 1rem auto;
+            max-width: 800px;
+        }
+
+        .thought-preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .thought-preview-content h3 {
+            color: #172B4D;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .thought-preview-content p {
+            color: #5E6C84;
+        }
+
+        .thought-preview-bookmarks {
+            display: flex;
+            gap: 4px;
+        }
+
+        .mini-bookmark {
+            width: 4px;
+            height: 40px;
+            border-radius: 2px;
+        }
+
+        .place-card, .goal-card, .memory-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#home" class="nav-brand">My Memory Collection</a>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#places">Places</a></li>
+            <li><a href="#goals">Goals</a></li>
+            <li><a href="#food">Food</a></li>
+            <li><a href="#thoughts">Thoughts</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="profile-image">
+                <img src="assets/images/profile.jpg?v=2" alt="Profile Picture" id="profile-pic">
+            </div>
+            <div class="profile-container">
+                <div class="profile-text">
+                    <h1>Welcome to<br>My Memory Collection</h1>
+                    <p class="intro-text">
+                        Exploring life's beautiful moments through places, people, and experiences. 
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <section id="places" class="content-section">
+                <h2>Places I've Visited</h2>
+                <div class="places-grid">
+                    <a href="places/chennai.html" class="place-card">
+                        <img src="images/ch1.jpg" alt="Chennai">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Chennai</h2>
+                            <p class="place-description">My memories in the city of warmth</p>
+                        </div>
+                    </a>
+                    <a href="places/palani.html" class="place-card">
+                        <img src="images/p5.jpg" alt="Palani">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Palani</h2>
+                            <p class="place-description">Sacred moments at the hill temple</p>
+                        </div>
+                    </a>
+                    <a href="places/ilanji.html" class="place-card">
+                        <img src="images/i4.jpg" alt="Ilanji">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Ilanji</h2>
+                            <p class="place-description">Peaceful moments in nature</p>
+                        </div>
+                    </a>
+                    <a href="places/tuticorin.html" class="place-card">
+                        <img src="images/tut1.jpg" alt="Tuticorin">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Tuticorin</h2>
+                            <p class="place-description">Coastal beauty and port city life</p>
+                        </div>
+                    </a>
+                    <a href="places/kerala.html" class="place-card">
+                        <img src="images/tri3.jpg" alt="Kerala">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Kerala</h2>
+                            <p class="place-description">Adventures in God's own country</p>
+                        </div>
+                    </a>
+                    <a href="places/bangalore.html" class="place-card">
+                        <img src="images/b1.jpg" alt="Bangalore">
+                        <div class="place-overlay">
+                            <h2 class="place-title">Bangalore</h2>
+                            <p class="place-description">Exploring the garden city</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section id="goals" class="content-section">
+                <h2>Goals & Dreams</h2>
+                <div class="goals-container">
+                    <a href="goals/dreaming.html" class="goal-card">
+                        <img src="images/Goal.jpeg" alt="My Goals">
+                        <div class="goal-overlay">
+                            <h3>Dreaming for Good</h3>
+                            <p>Click to explore my aspirations</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section id="food" class="content-section">
+                <h2>Food Adventures</h2>
+                <div class="memory-grid">
+                    <div class="memory-card food-card animate-fade-in">
+                        <img src="images/f1.jpeg" alt="Rasamalai">
+                        <div class="memory-card-content">
+                            <div class="memory-card-date">Favorite Dessert</div>
+                            <h3>Rasamalai Love</h3>
+                            <p>I love Rasamalai these days... The sweet, milky delicacy with its soft texture makes every day special.</p>
+                        </div>
+                    </div>
+                    <div class="memory-card food-card animate-fade-in" style="animation-delay: 0.3s;">
+                        <img src="images/f2.jpeg" alt="Full Meal Thali">
+                        <div class="memory-card-content">
+                            <div class="memory-card-date">Satisfying Meals</div>
+                            <h3>Full Meal Thali</h3>
+                            <p>I love Full meal and if it's a thali... then it's a good food in my tummy day! Nothing beats the variety and satisfaction of a complete thali.</p>
+                        </div>
+                    </div>
+                    <div class="memory-card food-card animate-fade-in" style="animation-delay: 0.6s;">
+                        <img src="images/f3.jpeg" alt="Sri Mathuram Coffee">
+                        <div class="memory-card-content">
+                            <div class="memory-card-date">Daily Ritual</div>
+                            <h3>Sri Mathuram Coffee</h3>
+                            <p>Appa never misses a coffee from Sri Mathuram... Hopping to Sri Mathuram is our routine these days. The perfect brew to start the day!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="thoughts" class="content-section">
+                <h2>My Thoughts</h2>
+                <div class="thoughts-container">
+                    <a href="thoughts/index.html" class="thought-preview-card">
+                        <div class="thought-preview-content">
+                            <h3>Collection of Reflections</h3>
+                            <p>Explore my thoughts on life, society, and the world around us</p>
+                        </div>
+                        <div class="thought-preview-bookmarks">
+                            <div class="mini-bookmark" style="background: #4CAF50;"></div>
+                            <div class="mini-bookmark" style="background: #2196F3;"></div>
+                            <div class="mini-bookmark" style="background: #9C27B0;"></div>
+                            <div class="mini-bookmark" style="background: #FF9800;"></div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Memory Collection. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Loading animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('fade-out');
+            }, 1500);
+        });
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress-bar').style.width = `${scrolled}%`;
+        });
+
+        // Section visibility
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Particle animation
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 5 + 1}px;
+                    height: ${Math.random() * 5 + 1}px;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.3});
+                    left: ${Math.random() * 100}vw;
+                    top: ${Math.random() * 100}vh;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: float ${Math.random() * 6 + 4}s linear infinite;
+                `;
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+    </script>
+</body>
+</html> 

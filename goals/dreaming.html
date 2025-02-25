@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dreams and Goals</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+
+        .dream-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .dream-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dream-image:hover {
+            transform: scale(1.02);
+        }
+
+        .dream-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-top: 2rem;
+        }
+
+        /* Additional styles for goals */
+        .goal-category {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 238, 0.9));
+            box-shadow: 0 8px 16px rgba(255, 99, 71, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(255, 99, 71, 0.1),
+                rgba(255, 182, 193, 0.1),
+                rgba(255, 218, 185, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .goal-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-category:hover::before {
+            opacity: 1;
+        }
+
+        .goal-category h3 {
+            color: #ff6347;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #ff7f50;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .goal-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .goal-item {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .goal-item:nth-child(1) { animation-delay: 0.1s; }
+        .goal-item:nth-child(2) { animation-delay: 0.2s; }
+        .goal-item:nth-child(3) { animation-delay: 0.3s; }
+        .goal-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .goal-item::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: #ff7f50;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .goal-item:hover {
+            transform: translateX(5px);
+            color: #ff6347;
+        }
+        
+        .goal-quote {
+            font-style: italic;
+            text-align: center;
+            color: #ff6347;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            padding: 1rem;
+            border-left: 4px solid #ff7f50;
+            background: linear-gradient(to right, rgba(255, 218, 185, 0.3), rgba(255, 255, 255, 0.95));
+            transition: all 0.3s ease;
+        }
+
+        .goal-quote:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 99, 71, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">Back to Home</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <header class="place-header">
+            <h1>Dreaming for Good</h1>
+            <p>Aspirations that drive me forward</p>
+        </header>
+
+        <div class="dream-content">
+            <img src="../images/Dreaming for good!.png" alt="Dreaming for Good" class="dream-image" onclick="openLightbox(this.src)">
+            <div class="dream-text">
+                <div class="goal-quote">
+                    "Dreams are not what you see in sleep, they are the things that don't let you sleep."
+                </div>
+
+                <div class="goal-category">
+                    <h3>Professional Growth</h3>
+                    <ul class="goal-list">
+                        <li class="goal-item">Excel in my chosen career path with dedication and continuous learning</li>
+                        <li class="goal-item">Work towards building a meaningful and impactful professional journey</li>
+                    </ul>
+                </div>
+
+                <div class="goal-category">
+                    <h3>Personal Development</h3>
+                    <ul class="goal-list">
+                        <li class="goal-item">Master the art of driving - gaining independence and freedom</li>
+                        <li class="goal-item">Learn Bharatanatyam - embracing cultural artistry and expression</li>
+                        <li class="goal-item">Cultivate a healthy lifestyle through mindful living</li>
+                        <li class="goal-item">Nurture the habit of reading more - expanding knowledge and perspectives</li>
+                    </ul>
+                </div>
+
+                <div class="goal-category">
+                    <h3>Travel & Experiences</h3>
+                    <ul class="goal-list">
+                        <li class="goal-item">Create cherished memories through family travels to Kerala</li>
+                        <li class="goal-item">Explore the vibrant culture and history of Chennai</li>
+                        <li class="goal-item">Discover the majestic beauty of Delhi with loved ones</li>
+                    </ul>
+                </div>
+                
+                <div class="goal-quote">
+                    "Every great dream begins with a dreamer. Always remember, you have within you the strength, the patience, and the passion to reach for the stars to change the world."
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+        }
+        
+        document.getElementById('page-lightbox').onclick = function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        };
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('page-lightbox').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> 

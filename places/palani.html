@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palani Memories</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">Back to Home</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <header class="place-header">
+            <h1>Palani</h1>
+            <p>Sacred moments at the hill temple</p>
+        </header>
+
+        <section class="memories-grid">
+            <article class="memory-card">
+                <img src="../images/p1.jpg" alt="Family heading to temple" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>The Journey Begins</h3>
+                    <p class="memory-date">May 19, 2019</p>
+                    <p class="memory-description">Finally after a long travel through train, our family heading towards the temple...</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/p2.jpg" alt="Cable car ride" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Cable Car Adventure</h3>
+                    <p class="memory-date">May 19, 2019</p>
+                    <p class="memory-description">Tired me in a cable car.. pic by ammukutti</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/p3.jpg" alt="Ammukutti" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Ammukutti's Moment</h3>
+                    <p class="memory-date">May 19, 2019</p>
+                    <p class="memory-description"> That's Ammukutti</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/p4.jpg" alt="View from cable car" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Scenic Cable Car View</h3>
+                    <p class="memory-date">May 19, 2019</p>
+                    <p class="memory-description">View from the cable car</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/p5.jpg" alt="Palani top view" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Post-Darshan View</h3>
+                    <p class="memory-date">May 19, 2019</p>
+                    <p class="memory-description">After Darshan... palani top view</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        // Simple lightbox function
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening lightbox with image:', src);
+        }
+        
+        // Close lightbox when clicking on it
+        document.getElementById('page-lightbox').onclick = function() {
+            this.style.display = 'none';
+        };
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('page-lightbox').style.display = 'none';
+            }
+        });
+    </script>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 

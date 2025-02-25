@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Thoughts | Memory Collection</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .thoughts-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .thought-card {
+            background: white;
+            border-radius: 15px;
+            aspect-ratio: auto;
+            min-height: 300px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s ease forwards;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .thought-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .thought-bookmark {
+            width: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            transition: all 0.3s ease;
+        }
+
+        .thought-card:hover .thought-bookmark {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .thought-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transition: transform 0.3s ease;
+            transform: translateZ(20px);
+            will-change: transform;
+        }
+
+        .thought-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #172B4D;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .thought-text {
+            color: #5E6C84;
+            line-height: 1.6;
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            overflow: auto;
+            max-height: none;
+            padding-right: 0.5rem;
+            display: block;
+            -webkit-line-clamp: unset;
+            -webkit-box-orient: unset;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .thought-card:hover .thought-text {
+            opacity: 1;
+        }
+
+        /* Interactive elements */
+        .thought-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--bookmark-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .thought-card:hover::after {
+            width: 90%;
+        }
+
+        /* Jira-like bookmark colors with gradients */
+        .time { --bookmark-color: linear-gradient(45deg, #2196F3, #1976D2); }
+        .nature { --bookmark-color: linear-gradient(45deg, #66BB6A, #43A047); }
+        .social { --bookmark-color: linear-gradient(45deg, #9C27B0, #7B1FA2); }
+        .expression { --bookmark-color: linear-gradient(45deg, #FF9800, #F57C00); }
+        .legacy { --bookmark-color: linear-gradient(45deg, #795548, #5D4037); }
+        .economics { --bookmark-color: linear-gradient(45deg, #F44336, #D32F2F); }
+
+        .thought-bookmark {
+            background: var(--bookmark-color);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #f4f5f7;
+            border-radius: 8px;
+            color: #172B4D;
+            text-decoration: none;
+            margin: 2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .back-button:hover {
+            background: #ebecf0;
+            transform: translateX(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .back-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Add animation delay for each card */
+        .thought-card:nth-child(1) { animation-delay: 0.1s; }
+        .thought-card:nth-child(2) { animation-delay: 0.2s; }
+        .thought-card:nth-child(3) { animation-delay: 0.3s; }
+        .thought-card:nth-child(4) { animation-delay: 0.4s; }
+        .thought-card:nth-child(5) { animation-delay: 0.5s; }
+        .thought-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Add click effect */
+        .thought-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Add floating icons */
+        .thought-card::before {
+            content: '💭';
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));
+            z-index: 2;
+        }
+
+        .time::before { 
+            content: '⏳';
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nature::before { 
+            content: '🌿';
+            background: linear-gradient(45deg, #66BB6A, #43A047);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .social::before { 
+            content: '👥';
+            background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .expression::before { 
+            content: '💭';
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .legacy::before { 
+            content: '🏛️';
+            background: linear-gradient(45deg, #795548, #5D4037);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .economics::before { 
+            content: '📊';
+            background: linear-gradient(45deg, #F44336, #D32F2F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .thought-card:hover::before {
+            opacity: 1;
+            transform: translateY(-5px) rotate(10deg) scale(1.1);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        /* Add a subtle pattern background */
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Add custom scrollbar for overflow text */
+        .thought-text::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .thought-text::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+            border-radius: 2px;
+        }
+
+        .thought-text::-webkit-scrollbar-thumb {
+            background: var(--bookmark-color);
+            border-radius: 2px;
+        }
+
+        /* Add scroll-based animation styles */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add hover effect to text */
+        .thought-text p {
+            transition: transform 0.3s ease;
+        }
+
+        .thought-card:hover .thought-text p {
+            transform: translateZ(30px);
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg"></div>
+    <div class="pattern-overlay"></div>
+    <a href="../index.html" class="back-button scroll-reveal">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+
+    <div class="thoughts-container">
+        <div class="thought-card time scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">Time's Trilogy</h3>
+                <div class="thought-text">
+                    <p>Past, present, and future go hand in hand. A delicate dance of coping with history's echoes, adapting to current trends, and building for a better tomorrow. Each moment shapes our journey, intertwined in an endless flow.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="thought-card nature scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">Nature's Pause Button</h3>
+                <div class="thought-text">
+                    <p>Vacations are nature's way of pressing pause - moments spent gazing at the sky, finding ourselves in the vastness. Yet, in our hustle-driven world, constantly chasing sunrises and sunsets might not serve our productive best. Balance is key.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="thought-card social scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">The Social Mirror</h3>
+                <div class="thought-text">
+                    <p>Modern life has become a carefully curated performance. People increasingly shape their actions around others' perceptions, crafting their past and present for public consumption. Drama isn't just entertainment - it's become our daily reality.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="thought-card expression scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">Evolution of Expression</h3>
+                <div class="thought-text">
+                    <p>From handwritten letters to digital stories, our need to express remains constant. As face-to-face connections diminish, new mediums emerge: Facebook, Twitter, Google - each platform a new chapter in humanity's eternal desire to connect. For better or worse, this digital revolution shapes our social fabric.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="thought-card legacy scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">Legacy & Progress</h3>
+                <div class="thought-text">
+                    <p>Our ancestors found harmony with nature while building our foundations. Their hard work echoes through generations, reminding us of simpler yet profound ways of living.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="thought-card economics scroll-reveal">
+            <div class="thought-bookmark"></div>
+            <div class="thought-content">
+                <h3 class="thought-title">Economics: A Love-Hate Story</h3>
+                <div class="thought-text">
+                    <p>The grand machinery of economics and politics - distant concepts that often provoke disdain, yet up close, they're the very building blocks of our society. There's a fascinating complexity in how these forces shape our world, especially in the intricate workings of economic systems.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll-based animations
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const parallaxBg = document.querySelector('.parallax-bg');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        scrollRevealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            
+            document.querySelectorAll('.thought-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                const viewportHeight = window.innerHeight;
+                const distance = centerY - viewportHeight / 2;
+                const rotation = distance * 0.02;
+                
+                if (rect.top < viewportHeight && rect.bottom > 0) {
+                    card.style.transform = `
+                        perspective(1000px)
+                        rotateX(${rotation}deg)
+                        translateY(${-rotation}px)
+                    `;
+                }
+            });
+        });
+
+        // Add smooth hover effect
+        document.querySelectorAll('.thought-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateZ(10px)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'none';
+            });
+        });
+    </script>
+</body>
+</html> 

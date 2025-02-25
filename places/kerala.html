@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Memories</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">My Journey</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <section class="place-header">
+            <h1>Kerala</h1>
+            <p>Adventures in God's own country</p>
+        </section>
+
+        <section class="memories-grid">
+            <div class="memory-card">
+                <img src="../images/tri1.jpg" alt="Velli Beach" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2024</div>
+                    <h3>Velli Beach</h3>
+                    <p>Appa at Velli beach in his own element</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="../images/tri2.jpg" alt="Aadhi at Velli Beach" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2024</div>
+                    <h3>Velli Beach</h3>
+                    <p>Aadhi enjoying at Velli beach near Trivandrum</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="../images/tri3.jpg" alt="Padmanabhaswamy Temple" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2024</div>
+                    <h3>Padmanabhaswamy Temple</h3>
+                    <p>Front view of the majestic temple</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="../images/tri4.jpg" alt="Padmanabhaswamy Temple Visit" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2024</div>
+                    <h3>Temple Visit with Family</h3>
+                    <p>At Padmanabhaswamy Temple, Trivandrum - Aadhi's cute little cry</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="../images/tri5.jpg" alt="Lulu Mall" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2024</div>
+                    <h3>Lulu Mall</h3>
+                    <p>Shopping and fun at Lulu Mall, Trivandrum</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <img src="../images/tri6.jpg" alt="Thenmala Dam" onclick="openLightbox(this.src)">
+                <div class="memory-card-content">
+                    <div class="memory-card-date">2025</div>
+                    <h3>Thenmala Dam</h3>
+                    <p>Beautiful views at Thenmala Dam</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        // Simple lightbox function
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening lightbox with image:', src);
+        }
+        
+        // Close lightbox when clicking on it
+        document.getElementById('page-lightbox').onclick = function() {
+            this.style.display = 'none';
+        };
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('page-lightbox').style.display = 'none';
+            }
+        });
+    </script>
+    
+    <!-- Keep the original script reference -->
+    <script src="../js/script.js"></script>
+</body>
+</html> 

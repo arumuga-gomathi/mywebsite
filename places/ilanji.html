@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilanji Memories</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">Back to Home</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <header class="place-header">
+            <h1>Ilanji</h1>
+            <p>Peaceful Moments</p>
+        </header>
+
+        <section class="memories-grid">
+            <!-- Add onclick="openLightbox(this.src)" to all img tags -->
+            <article class="memory-card">
+                <img src="../images/i1.jpg" alt="Ilanji landscape" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>My Happy Place</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description">Just beautiful!</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/i2.jpg" alt="Family gathering" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Serene view</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description"> A Small bike ride is what it takes to get to see this view!</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/i3.jpg" alt="Local temple" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Courtallam</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description">Gorgeous view!</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/i4.jpg" alt="Farm visit" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Farm Visit</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description">Posing for a pic!</p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/i5.jpg" alt="Traditional meal" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Traditions</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description">Enjoying traditions! </p>
+                </div>
+            </article>
+
+            <article class="memory-card">
+                <img src="../images/i6.jpg" alt="Sunset view" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>Sashti Day</h3>
+                    <p class="memory-date">June 2023</p>
+                    <p class="memory-description">Beliefs</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        // Simple lightbox function
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening lightbox with image:', src);
+        }
+        
+        // Close lightbox when clicking on it
+        document.getElementById('page-lightbox').onclick = function() {
+            this.style.display = 'none';
+        };
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('page-lightbox').style.display = 'none';
+            }
+        });
+    </script>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 

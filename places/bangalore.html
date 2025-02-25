@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore Memories</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Inline lightbox styles to ensure they work */
+        #page-lightbox {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+        
+        /* Interactive elements */
+        .memory-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .memory-card::before {
+            content: "\f030";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .memory-card:hover::before {
+            opacity: 1;
+        }
+        
+        .video-card img {
+            filter: brightness(0.8);
+        }
+        
+        .video-card::before {
+            content: "\f04b";
+        }
+        
+        /* City background effect */
+        .city-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/b1.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        
+        .place-header {
+            position: relative;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            color: #333;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">Back to Home</a>
+    </nav>
+
+    <!-- Lightbox container -->
+    <div id="page-lightbox"></div>
+
+    <main class="place-page">
+        <div class="city-background"></div>
+        <header class="place-header">
+            <h1>Bangalore</h1>
+            <p>The garden city with its endless hustle</p>
+        </header>
+
+        <section class="memories-grid">
+            <article class="memory-card">
+                <img src="../images/b1.jpg" alt="Bangalore Crowd" onclick="openLightbox(this.src)">
+                <div class="memory-content">
+                    <h3>City Reflections</h3>
+                    <p class="memory-date">2024</p>
+                    <p class="memory-description">Me looking at the vast crowd that runs tirelessly for their needs...</p>
+                </div>
+            </article>
+
+            <article class="memory-card video-card">
+                <img src="../images/b1.jpg" alt="Bangalore Traffic" onclick="openVideo('../images/b2.mp4')">
+                <div class="memory-content">
+                    <h3>Endless Traffic</h3>
+                    <p class="memory-date">2024</p>
+                    <p class="memory-description">Bangalore traffic that cares for no one...</p>
+                </div>
+            </article>
+            
+            <article class="memory-card video-card">
+                <img src="../images/b1.jpg" alt="Movie with Sathya" onclick="openVideo('../images/b3.mp4')">
+                <div class="memory-content">
+                    <h3>Manjummel Boys</h3>
+                    <p class="memory-date">2024</p>
+                    <p class="memory-description">Sathya and me gone for Manjummel Boys film (also our first film together)...</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Inline JavaScript for lightbox -->
+    <script>
+        // Simple lightbox function
+        function openLightbox(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<img src="' + src + '">';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening lightbox with image:', src);
+        }
+        
+        // Video lightbox function
+        function openVideo(src) {
+            var lightbox = document.getElementById('page-lightbox');
+            lightbox.innerHTML = '<video controls autoplay style="max-width: 90%; max-height: 90vh;"><source src="' + src + '" type="video/mp4"></video>';
+            lightbox.style.display = 'flex';
+            
+            // Log for debugging
+            console.log('Opening video:', src);
+        }
+        
+        // Close lightbox when clicking on it
+        document.getElementById('page-lightbox').onclick = function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                
+                // Stop video if playing
+                var video = this.querySelector('video');
+                if (video) video.pause();
+            }
+        };
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var lightbox = document.getElementById('page-lightbox');
+                lightbox.style.display = 'none';
+                
+                // Stop video if playing
+                var video = lightbox.querySelector('video');
+                if (video) video.pause();
+            }
+        });
+    </script>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 
