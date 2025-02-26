@@ -1,5 +1,5 @@
 # A Simple Website built using HTML,CSS and Javascript
 
-This is a basic website built as apart of learning. There is a lot more to improve in feature and content-wise.
+This is a basic website built as a part of learning. There is a lot more to improve in terms of feature and contents
 
 URL: ([https://arumuga-gomathi.github.io/mywebsite/])
